@@ -1,0 +1,44 @@
+server:
+  port: 8090
+
+logging:
+  file: logs/robot.log
+  level:
+    root: info
+    com.cy.robot: debug
+
+spring:
+  application:
+    name: robot
+  resources:
+    add-mappings: true
+    static-locations: classpath:/static/,classpath:/public/
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://39.108.143.76/example
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+
+robot:
+  # 调试模式
+  debug: true
+  embedding:
+    file: support/embedding/word2vec.txt
+  processor:
+    ignore-case: true
+    trim-whitespace: true
+    transfo-simplified: true
+    transfo-half-width: true
+  identifier:
+    # 正则匹配开关
+    regular-matching: true
+    # 相似度匹配开关
+    similar-matching: true
+    # 相似度阈值
+    similar-threshold: 0.8f
+    # 问题配置文件列表
+    files:
+      - support/questions/weather.txt
+
+
