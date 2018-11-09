@@ -1,12 +1,16 @@
 package com.cy.robot.execute;
 
 import com.cy.robot.boost.AbstractExecute;
+import com.cy.robot.business.entity.WeatherResponse;
+import com.cy.robot.business.service.WeatherDataService;
 import com.cy.robot.carrier.Code;
 import com.cy.robot.carrier.Judge;
 import com.cy.robot.carrier.Answer;
 import com.cy.robot.carrier.Word;
+import com.cy.robot.domain.Weather;
 import com.cy.robot.intent.WeatherQueryIntent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -20,13 +24,16 @@ import java.util.Optional;
 @Component
 public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
 
-    public static final String domain = "WEATHER";
+    private static final String domain = "WEATHER";
 
-    public static final String intent = "WEATHER_QUERY";
+    private static final String intent = "WEATHER_QUERY";
 
     public WeatherQueryExecute() {
         super(domain, intent);
     }
+
+    @Autowired
+    private WeatherDataService weatherDataService;
 
     @Override
     public Optional<WeatherQueryIntent> start(String text, List<Word> words) {
@@ -50,8 +57,21 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
 
     @Override
     public Answer apply(WeatherQueryIntent intent) {
+        /*
+        "date":"27日星期四", "high":"高温 22℃",
+        "fengli":"<![CDATA[3-4级]]>", "low":"低温 14℃",
+        "fengxiang":"南风", "type":"阴"
+        */
+        WeatherResponse response = weatherDataService.getDataByCityName(intent.getCity());
+        Weather.Forecast forecast = response.getData().getForecast().get(0);
+        StringBuilder sb = new StringBuilder();
+        sb.append(forecast.getDate())
+                .append(",今天最高温度：").append(forecast.getHigh())
+                .append(",最低温度：").append(forecast.getLow())
+                .append("天气有点").append(forecast.getType())
+                .append("小阳").append("祝您生活愉快！");
         Answer answer = new Answer();
-        answer.setText("今夜到明天上午有点想你,预计下午转为持续想你,受此低情绪影响,傍晚将转为大到暴想,心情降低五度");
+        answer.setText(sb.toString());
         answer.setCode(Code.SUCCESS);
         return answer;
     }
