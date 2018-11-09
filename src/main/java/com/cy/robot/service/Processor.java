@@ -1,7 +1,7 @@
 package com.cy.robot.service;
 
 import com.cy.robot.config.ApplicationProperties;
-import com.cy.robot.util.NormalizeUtils;
+import com.cy.robot.util.NormalizeUtil;
 import com.hankcs.hanlp.HanLP;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,9 @@ public class Processor {
     public String normalize(String text) {
 
         if (properties.getProcessor().isTransfoHalfWidth()) {
-            text = NormalizeUtils.toHalfWidth(text);
+            text = NormalizeUtil.toHalfWidth(text);
         }else{
-            text = NormalizeUtils.punctuatioToFullWidth(text);
+            text = NormalizeUtil.punctuatioToFullWidth(text);
         }
 
         if (properties.getProcessor().isIgnoreCase()) {
@@ -44,7 +44,7 @@ public class Processor {
 
         }
 
-        text = NormalizeUtils.normalizePunctuation(text);
+        text = NormalizeUtil.normalizePunctuation(text);
 
         log.debug("normalize:{}",text);
 

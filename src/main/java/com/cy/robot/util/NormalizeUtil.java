@@ -15,7 +15,7 @@ import static java.lang.Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_
  * 语句规范化转换工具类。
  *
  */
-public class NormalizeUtils {
+public class NormalizeUtil {
 
     /**
      * ASCII表中可见字符从!开始，偏移位值为33(Decimal)
