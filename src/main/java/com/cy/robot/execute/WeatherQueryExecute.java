@@ -68,11 +68,11 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
         Forecast forecast = weather.getForecast().get(0);
         StringBuilder sb = new StringBuilder();
         sb.append(forecast.getDate())
-
-                .append(weather.getCity()).append("的")
+                .append(weather.getCity())
+                .append("的天气：").append(forecast.getType())
                 .append(",").append(forecast.getHigh())
                 .append(",").append(forecast.getLow())
-                .append("，天气：").append(forecast.getType())
+
                 .append(weather.getGanmao())
                 .append("小阳").append("祝您生活愉快！");
         Answer answer = new Answer();
