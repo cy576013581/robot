@@ -64,10 +64,10 @@ public class Identifier {
         regulars = new ArrayList<>(regularMap.keySet());
         questions = new ArrayList<>(questionMap.keySet());
 
-        log.debug("start load word2vec :{} ",props.getEmbedding().getFile());
+        log.debug("load word2vec :{} ",props.getEmbedding().getFile());
         wordVectorModel = new WordVectorModel(props.getEmbedding().getFile());
 
-        log.debug("docVectorModel load questions");
+        log.debug("load questions");
         docVectorModel = new DocVectorModel(wordVectorModel);
         for (int i = 0; i < questions.size(); i++) {
             String q = processor.normalize(questions.get(i));

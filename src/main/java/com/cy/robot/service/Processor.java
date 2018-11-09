@@ -46,7 +46,7 @@ public class Processor {
 
         text = NormalizeUtil.normalizePunctuation(text);
 
-        log.debug("normalize:{}",text);
+        log.debug("-:{}",text);
 
         return text;
     }

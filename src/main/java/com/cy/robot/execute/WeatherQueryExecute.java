@@ -1,6 +1,7 @@
 package com.cy.robot.execute;
 
 import com.cy.robot.boost.AbstractExecute;
+import com.cy.robot.business.entity.Forecast;
 import com.cy.robot.business.entity.WeatherResponse;
 import com.cy.robot.business.service.WeatherDataService;
 import com.cy.robot.carrier.Code;
@@ -63,12 +64,16 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
         "fengxiang":"南风", "type":"阴"
         */
         WeatherResponse response = weatherDataService.getDataByCityName(intent.getCity());
-        Weather.Forecast forecast = response.getData().getForecast().get(0);
+        Weather weather = response.getData();
+        Forecast forecast = weather.getForecast().get(0);
         StringBuilder sb = new StringBuilder();
         sb.append(forecast.getDate())
-                .append(",今天最高温度：").append(forecast.getHigh())
-                .append(",最低温度：").append(forecast.getLow())
-                .append("天气有点").append(forecast.getType())
+
+                .append(weather.getCity()).append("的")
+                .append(",").append(forecast.getHigh())
+                .append(",").append(forecast.getLow())
+                .append("，天气：").append(forecast.getType())
+                .append(weather.getGanmao())
                 .append("小阳").append("祝您生活愉快！");
         Answer answer = new Answer();
         answer.setText(sb.toString());
