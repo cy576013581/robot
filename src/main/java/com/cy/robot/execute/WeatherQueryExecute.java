@@ -3,6 +3,7 @@ package com.cy.robot.execute;
 import com.cy.robot.boost.AbstractExecute;
 import com.cy.robot.business.entity.Forecast;
 import com.cy.robot.business.entity.WeatherResponse;
+import com.cy.robot.business.service.CityDataService;
 import com.cy.robot.business.service.WeatherDataService;
 import com.cy.robot.carrier.Code;
 import com.cy.robot.carrier.Judge;
@@ -36,9 +37,11 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
     @Autowired
     private WeatherDataService weatherDataService;
 
+    @Autowired
+    private CityDataService cityDataService;
+
     @Override
     public Optional<WeatherQueryIntent> start(String text, List<Word> words) {
-        System.out.println(words);
         WeatherQueryIntent intent = new WeatherQueryIntent();
         intent.setCity("北京");
         for(Word w : words){
@@ -63,7 +66,8 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
         "fengli":"<![CDATA[3-4级]]>", "low":"低温 14℃",
         "fengxiang":"南风", "type":"阴"
         */
-        WeatherResponse response = weatherDataService.getDataByCityName(intent.getCity());
+        String cityCode = cityDataService.getCityCode(intent.getCity());
+        WeatherResponse response = weatherDataService.getDataByCityName(cityCode);
         Weather weather = response.getData();
         Forecast forecast = weather.getForecast().get(0);
         StringBuilder sb = new StringBuilder();
