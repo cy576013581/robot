@@ -36,6 +36,7 @@
         <hanlp.version>1.6.8</hanlp.version>
         <druid.version>1.0.11</druid.version>
         <mysql-connector-java.version>5.1.22</mysql-connector-java.version>
+        <httpclient.version>4.5.6</httpclient.version>
     </properties>
 
     <dependencies>
@@ -81,6 +82,11 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
         </dependency>
 
         <!-- Apache Commons -->
