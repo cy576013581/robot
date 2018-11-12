@@ -87,4 +87,5 @@ Desktop.ini
 ######################
 # Project
 ######################
-support/
+support/data
+support/embedding

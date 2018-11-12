@@ -1,11 +1,9 @@
 package com.cy.robot.business.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import lombok.NoArgsConstructor;
 
 /**
  * @description: ${description}
@@ -13,19 +11,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @create: 2018-11-09
  **/
 @Data
-@XmlRootElement(name = "d")
-@XmlAccessorType(XmlAccessType.FIELD)
+@NoArgsConstructor
+@AllArgsConstructor
 public class City {
 
-    @XmlAttribute(name = "d1")
-    private String cityId;
+    private String pinyin;
 
-    @XmlAttribute(name = "d2")
-    private String cityName;
-
-    @XmlAttribute(name = "d3")
-    private String cityCode;
-
-    @XmlAttribute(name = "d4")
     private String province;
+
+    private String name;
+
+    private String code;
 }

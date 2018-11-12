@@ -66,8 +66,8 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
         "fengli":"<![CDATA[3-4级]]>", "low":"低温 14℃",
         "fengxiang":"南风", "type":"阴"
         */
-        String cityCode = cityDataService.getCityCode(intent.getCity());
-        WeatherResponse response = weatherDataService.getDataByCityName(cityCode);
+//        String cityCode = cityDataService.getCityCode(intent.getCity());
+        WeatherResponse response = weatherDataService.getDataByCityName(intent.getCity());
         Weather weather = response.getData();
         Forecast forecast = weather.getForecast().get(0);
         StringBuilder sb = new StringBuilder();
