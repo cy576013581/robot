@@ -9,12 +9,12 @@
   <nz-content style="height: 84vh;background: bisque;">
     <div class="content">
       <div class="box" *ngFor="let message of imessages">
-        <!--<div class="message_left">
+        <div *ngIf="message.type == 1" class="message_left">
           <nz-avatar nzSize="large" nzIcon="anticon anticon-user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
-          <span class="info info_left">message</span>
-        </div>-->
-        <div class="message_right">
-          <span class="info info_right">{{message}}</span>
+          <span class="info info_left">{{message.text}}</span>
+        </div>
+        <div *ngIf="message.type == 2" class="message_right">
+          <span class="info info_right">{{message.text}}</span>
           <nz-avatar nzSize="large" nzIcon="anticon anticon-user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
         </div>
       </div>

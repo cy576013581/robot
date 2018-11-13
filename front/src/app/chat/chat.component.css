@@ -6,6 +6,8 @@
 
 /*content*/
 .content{
+  overflow:auto;
+  height: 84vh;
 }
 .box{
   overflow: hidden;
