@@ -20,10 +20,15 @@ export class ChatComponent implements OnInit {
   }
 
   send(): void {
-    this.isLoading = true;
-    this.message.info(this.text);
-    this.text="";
-    this.isLoading = false;
+    if (this.text == "" || this.text == null){
+      this.message.error("请输入你要问的问题哟！")
+    } else{
+      this.isLoading = true;
+
+      this.message.info(this.text);
+      this.text="";
+      this.isLoading = false;
+    }
   }
 
 }
