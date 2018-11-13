@@ -77,8 +77,8 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
                 .append(",").append(forecast.getHigh())
                 .append(",").append(forecast.getLow())
 
-                .append(weather.getGanmao())
-                .append("小阳").append("祝您生活愉快！");
+                .append(",").append(weather.getGanmao())
+                .append("小y").append("祝您生活愉快！");
         Answer answer = new Answer();
         answer.setText(sb.toString());
         answer.setCode(Code.SUCCESS);

@@ -1,0 +1,17 @@
+.robot_name{
+  font-size: 20px;
+  color: white;
+}
+
+
+.text{
+  margin-left: 8px;
+  margin-right: 8px;
+  flex: 1;
+  top: 10px;
+}
+.btn_send{
+  margin-left: 5px;
+  margin-right: 8px;
+  top: 10px;
+}
