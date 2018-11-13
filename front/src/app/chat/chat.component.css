@@ -1,17 +1,51 @@
+/*header*/
 .robot_name{
   font-size: 20px;
   color: white;
 }
 
+/*content*/
+.content{
+}
+.box{
+  overflow: hidden;
+  margin: 12px;
+}
+.message_left{
+  float: left;
+}
+.info{
+  background: deepskyblue;
+  border-radius: 5px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  padding: 0 10px;
+  vertical-align: middle;
+  color: white;
+}
+.info_left{
+  margin-left: 10px;
+}
+.message_right{
+  float: right;
+}
+.info_right{
+  margin-right: 10px;
+}
 
+/*footer*/
 .text{
   margin-left: 8px;
   margin-right: 8px;
   flex: 1;
-  top: 10px;
+  top: 1vh;
+  height: 6vh;
+  display: block;
 }
 .btn_send{
   margin-left: 5px;
   margin-right: 8px;
-  top: 10px;
+  top: 1vh;
+  height: 6vh;
 }

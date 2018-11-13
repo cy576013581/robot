@@ -14,6 +14,8 @@ export class ChatComponent implements OnInit {
 
   text : string;
 
+  imessages : string[] = [];
+
   constructor(private message: NzMessageService) { }
 
   ngOnInit() {
@@ -24,8 +26,7 @@ export class ChatComponent implements OnInit {
       this.message.error("请输入你要问的问题哟！")
     } else{
       this.isLoading = true;
-
-      this.message.info(this.text);
+      this.imessages.push(this.text);
       this.text="";
       this.isLoading = false;
     }

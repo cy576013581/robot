@@ -6,8 +6,19 @@
 
   </nz-header>
 
-  <nz-content style="height: 84vh;background: white;">
-
+  <nz-content style="height: 84vh;background: bisque;">
+    <div class="content">
+      <div class="box" *ngFor="let message of imessages">
+        <!--<div class="message_left">
+          <nz-avatar nzSize="large" nzIcon="anticon anticon-user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+          <span class="info info_left">message</span>
+        </div>-->
+        <div class="message_right">
+          <span class="info info_right">{{message}}</span>
+          <nz-avatar nzSize="large" nzIcon="anticon anticon-user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+        </div>
+      </div>
+    </div>
   </nz-content>
   <nz-footer style="height: 8vh;padding: 0px;">
     <div style="display: flex;height: 8vh;line-height: 8vh;">
