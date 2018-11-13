@@ -22,9 +22,8 @@ export class ChatComponent implements OnInit {
   send(): void {
     this.isLoading = true;
     this.message.info(this.text);
-    setTimeout(_ => {
-      this.isLoading = false;
-    }, 5000);
+    this.text="";
+    this.isLoading = false;
   }
 
 }
