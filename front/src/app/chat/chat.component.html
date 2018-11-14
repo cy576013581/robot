@@ -8,7 +8,7 @@
 
   <nz-content style="height: 84vh;background: bisque;">
     <div class="content">
-      <div class="box" *ngFor="let message of imessages">
+      <div class="box" *ngFor="let message of infos">
         <div *ngIf="message.type == 1" class="message_left">
           <nz-avatar nzSize="large" nzIcon="anticon anticon-user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
           <span class="info info_left">{{message.text}}</span>
