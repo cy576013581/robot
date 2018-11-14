@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NzMessageService} from "ng-zorro-antd";
 import {Text} from "./text";
+import {ChatService} from "./chat.service";
+import {Question} from "./question";
 
 @Component({
   selector: 'app-chat',
@@ -13,24 +15,35 @@ export class ChatComponent implements OnInit {
 
   isLoading = false;
 
-  text : string;
+  text: string;
 
-  imessages : Text[] = [];
+  infos: Text[] = [];
 
-  constructor(private message: NzMessageService) { }
+  constructor(private message: NzMessageService,
+              private chatService: ChatService) {
+  }
 
   ngOnInit() {
   }
 
   send(): void {
-    if (this.text == "" || this.text == null){
+    if (this.text == "" || this.text == null) {
       this.message.error("请输入你要问的问题哟！")
-    } else{
+    } else {
       this.isLoading = true;
 
-      this.imessages.push(new Text(2,this.text));
-      this.imessages.push(new Text(1,"您输入的是："+this.text));
-      this.text="";
+      this.infos.push(new Text(2, this.text));
+      this.chatService.chat(new Question(this.text)).subscribe(
+        (a) => {
+          // this.infos.push(a);
+          this.isLoading = false;
+        },
+        (e) => {
+          this.infos.push(new Text(2, "抱歉，服务器发生错误"));
+          this.isLoading = false;
+        }
+      );
+      this.text = "";
       this.isLoading = false;
     }
   }
