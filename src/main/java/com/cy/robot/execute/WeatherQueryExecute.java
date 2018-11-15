@@ -74,10 +74,10 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
         sb.append(forecast.getDate())
                 .append(weather.getCity())
                 .append("的天气：").append(forecast.getType())
-                .append(",").append(forecast.getHigh())
-                .append(",").append(forecast.getLow())
+                .append("，").append(forecast.getHigh())
+                .append("，").append(forecast.getLow())
 
-                .append(",").append(weather.getGanmao())
+                .append("，").append(weather.getGanmao())
                 .append("小y").append("祝您生活愉快！");
         Answer answer = new Answer();
         answer.setText(sb.toString());

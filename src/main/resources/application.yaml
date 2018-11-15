@@ -36,7 +36,7 @@ robot:
     # 相似度匹配开关
     similar-matching: true
     # 相似度阈值
-    similar-threshold: 0.8f
+    similar-threshold: 0.75f
     # 问题配置文件列表
     files:
       - support/questions/weather.txt

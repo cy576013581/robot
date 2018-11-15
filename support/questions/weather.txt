@@ -2,6 +2,7 @@ WEATHER
 -
 .*天气+.*
 .*温度+.*
+.*[冷|热]+.*
 =
 WEATHER_QUERY
 @

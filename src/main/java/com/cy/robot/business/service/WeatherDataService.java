@@ -16,8 +16,6 @@ public class WeatherDataService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final long TIME_OUT = 10L;
-
     public WeatherResponse getDataByCityId(String cityId) {
         String uri = WEATHER_URI + "citykey=" + cityId;
         return this.getWeatherResponse(uri);
