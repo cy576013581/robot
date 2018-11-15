@@ -7,6 +7,7 @@ import com.cy.robot.carrier.Result;
 import com.cy.robot.service.KernelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,7 @@ public class KernelController {
      * 问答总入口
      */
     @RequestMapping
+    @CrossOrigin(origins = "*", maxAge = 3600)
     public Result<String> reply( Question question){
         log.debug("question :{}",question.getText());
         Answer answer = kernelService.reply(question);
