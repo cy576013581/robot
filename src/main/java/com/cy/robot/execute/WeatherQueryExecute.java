@@ -9,6 +9,7 @@ import com.cy.robot.carrier.Code;
 import com.cy.robot.carrier.Judge;
 import com.cy.robot.carrier.Answer;
 import com.cy.robot.carrier.Word;
+import com.cy.robot.config.ApplicationProperties;
 import com.cy.robot.domain.Weather;
 import com.cy.robot.intent.WeatherQueryIntent;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +37,6 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
 
     @Autowired
     private WeatherDataService weatherDataService;
-
-    @Autowired
-    private CityDataService cityDataService;
 
     @Override
     public Optional<WeatherQueryIntent> start(String text, List<Word> words) {
@@ -78,7 +76,7 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
                 .append("，").append(forecast.getLow())
 
                 .append("，").append(weather.getGanmao())
-                .append("小y").append("祝您生活愉快！");
+                .append(props.getName()).append("祝您生活愉快！");
         Answer answer = new Answer();
         answer.setText(sb.toString());
         answer.setCode(Code.SUCCESS);

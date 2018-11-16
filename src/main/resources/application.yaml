@@ -21,6 +21,7 @@ spring:
     username: root
 
 robot:
+  name: 小歪
   # 调试模式
   debug: true
   embedding:

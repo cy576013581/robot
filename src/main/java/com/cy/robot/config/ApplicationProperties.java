@@ -11,6 +11,9 @@ import java.util.List;
 @ConfigurationProperties(prefix = "robot")
 public class ApplicationProperties {
 
+    // 机器人昵称
+    private String name = "小歪";
+
     // 调试模式
     private boolean debug = true;
 
