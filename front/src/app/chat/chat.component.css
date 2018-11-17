@@ -8,10 +8,12 @@
 .content{
   overflow:auto;
   height: 84vh;
+  width: 100%;
 }
 .box{
   overflow: hidden;
-  margin: 12px;
+  padding: 12px;
+  width: 100%;
 }
 .message_left{
   float: left;
@@ -20,7 +22,7 @@
   background: deepskyblue;
   border-radius: 5px;
   height: auto;
-  max-width: 75%;
+  max-width: 80%;
   line-height: 32px;
   display: inline-block;
   padding: 4px 10px;

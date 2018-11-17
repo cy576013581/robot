@@ -17,6 +17,8 @@ public class ApplicationProperties {
     // 调试模式
     private boolean debug = true;
 
+    private String dateModel = "support/date/TimeExp.m";
+
     // 词向量文件
     private final Embedding embedding = new Embedding();
 

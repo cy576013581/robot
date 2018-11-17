@@ -26,6 +26,7 @@ robot:
   debug: true
   embedding:
     file: support/embedding/word2vec.txt
+  date-model : support/date/TimeExp.m
   processor:
     ignore-case: true
     trim-whitespace: true

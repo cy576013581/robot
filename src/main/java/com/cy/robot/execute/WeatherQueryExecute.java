@@ -10,11 +10,15 @@ import com.cy.robot.carrier.Judge;
 import com.cy.robot.carrier.Word;
 import com.cy.robot.domain.Weather;
 import com.cy.robot.intent.WeatherQueryIntent;
+import com.cy.robot.time.DateService;
+import com.cy.robot.time.nlp.TimeUnit;
+import com.cy.robot.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,16 +40,25 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
     @Autowired
     private WeatherDataService weatherDataService;
 
+    @Autowired
+    private DateService dateService;
+
     @Override
     public Optional<WeatherQueryIntent> start(String text, List<Word> words) {
         WeatherQueryIntent intent = new WeatherQueryIntent();
         intent.setCity("北京");
         for(Word w : words){
             if("t".equals(w.getNature())){
-                intent.setDate(LocalDate.now().toString());
+                String date = dateService.parse(w.getWord());// 抽取时间
+                if(null != date && !"".equals(date)){
+                    intent.setDate(date);
+                }
             }else if("ns".equals(w.getNature())){
                 intent.setCity(w.getWord());
             }
+        }
+        if(null == intent.getDate() || "".equals(intent.getDate())){
+            intent.setDate(LocalDate.now().toString());
         }
         return Optional.of(intent);
     }
@@ -63,9 +76,11 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
         "fengxiang":"南风", "type":"阴"
         */
 //        String cityCode = cityDataService.getCityCode(intent.getCity());
+
+        int diff = DateUtil.getDiff(DateUtil.parseDate(intent.getDate()),DateUtil.parseDate(DateUtil.formatDate(new Date())));
         WeatherResponse response = weatherDataService.getDataByCityName(intent.getCity());
         Weather weather = response.getData();
-        Forecast forecast = weather.getForecast().get(0);
+        Forecast forecast = weather.getForecast().get(diff);
         StringBuilder sb = new StringBuilder();
         sb.append(forecast.getDate())
                 .append(weather.getCity())
