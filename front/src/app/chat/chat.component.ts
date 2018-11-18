@@ -14,7 +14,7 @@ import {ChatService} from "../chat.service";
 })
 export class ChatComponent implements OnInit {
 
-  robotName = '小y';
+  robotName = '小歪';
 
   isLoading = false;
 
@@ -48,22 +48,6 @@ export class ChatComponent implements OnInit {
           this.isLoading = false;
         }
       );
-      // this.http.post("http://localhost:8090/sys/robot", new Question(this.text))
-      //   .subscribe(
-      //     val => {
-      //       console.log("Post call successful value returned in body", val);
-      //       this.infos.push(new Text(1, val.data));
-      //       this.isLoading = false;
-      //     },
-      //     error => {
-      //       console.log("Post call in error", error);
-      //       this.infos.push(new Text(1, "抱歉，服务器发生错误"));
-      //       this.isLoading = false;
-      //     },
-      //     () => {
-      //       console.log("The Post observable is now completed.");
-      //     }
-      //   );
       this.text = "";
     }
   }

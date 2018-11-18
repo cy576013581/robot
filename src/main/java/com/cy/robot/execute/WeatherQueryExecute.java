@@ -3,6 +3,7 @@ package com.cy.robot.execute;
 import com.cy.robot.boost.AbstractExecute;
 import com.cy.robot.business.entity.Forecast;
 import com.cy.robot.business.entity.WeatherResponse;
+import com.cy.robot.business.entity.Yesterday;
 import com.cy.robot.business.service.WeatherDataService;
 import com.cy.robot.carrier.Answer;
 import com.cy.robot.carrier.Code;
@@ -77,19 +78,33 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
         */
 //        String cityCode = cityDataService.getCityCode(intent.getCity());
 
-        int diff = DateUtil.getDiff(DateUtil.parseDate(intent.getDate()),DateUtil.parseDate(DateUtil.formatDate(new Date())));
         WeatherResponse response = weatherDataService.getDataByCityName(intent.getCity());
         Weather weather = response.getData();
-        Forecast forecast = weather.getForecast().get(diff);
+        int diff = DateUtil.getDiff(DateUtil.parseDate(DateUtil.formatDate(new Date()))
+                ,DateUtil.parseDate(intent.getDate()));
         StringBuilder sb = new StringBuilder();
-        sb.append(forecast.getDate())
-                .append(weather.getCity())
-                .append("的天气：").append(forecast.getType())
-                .append("，").append(forecast.getHigh())
-                .append("，").append(forecast.getLow())
+        if(diff == -1){
+            Yesterday yesterday = weather.getYesterday();
+            sb.append(yesterday.getDate())
+                    .append(weather.getCity())
+                    .append("的天气：").append(yesterday.getType())
+                    .append("，").append(yesterday.getHigh())
+                    .append("，").append(yesterday.getLow())
 
-                .append("，").append(weather.getGanmao())
-                .append(props.getName()).append("祝您生活愉快！");
+                    .append("，").append(weather.getGanmao())
+                    .append(props.getName()).append("祝您生活愉快！");
+        }else{
+            Forecast forecast = weather.getForecast().get(diff);
+            sb.append(forecast.getDate())
+                    .append(weather.getCity())
+                    .append("的天气：").append(forecast.getType())
+                    .append("，").append(forecast.getHigh())
+                    .append("，").append(forecast.getLow())
+
+                    .append("，").append(weather.getGanmao())
+                    .append(props.getName()).append("祝您生活愉快！");
+        }
+
         Answer answer = new Answer();
         answer.setText(sb.toString());
         answer.setCode(Code.SUCCESS);

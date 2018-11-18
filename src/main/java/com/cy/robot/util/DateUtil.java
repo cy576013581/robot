@@ -191,7 +191,7 @@ public class DateUtil extends CommonDateUtil {
     }
 
     public static int getDiff(Date date1,Date date2){
-        return (int) Math.abs((date2.getTime() - date1.getTime()) / (1000*3600*24));
+        return (int) ((date2.getTime() - date1.getTime()) / (1000*3600*24));
     }
 
     //日期格式为:年 月 日 ；如：2016年04月06日

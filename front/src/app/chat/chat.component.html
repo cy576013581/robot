@@ -22,7 +22,7 @@
   </nz-content>
   <nz-footer style="height: 8vh;padding: 0px;">
     <div style="display: flex;height: 8vh;line-height: 8vh;">
-      <input class="text" nz-input placeholder="输入你想说的内容..." [(ngModel)]="text">
+      <input class="text" nz-input placeholder="输入你想说的内容..." [(ngModel)]="text" (keyup.enter)="send()">
       <button class="btn_send" nz-button nzType="primary" (click)="send()" [nzLoading]="isLoading">
         <i nz-icon type="left-circle" theme="twotone"></i>发送
       </button>

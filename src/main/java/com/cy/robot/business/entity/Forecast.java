@@ -27,4 +27,5 @@ public class Forecast implements Serializable {
     private String low;
     private String fengxiang;
     private String type;
+
 }
