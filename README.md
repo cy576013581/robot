@@ -1,6 +1,6 @@
 # robot
 
-![](./pic)
+![](./pic/talking.png)
 
 #### 开发日志
 
