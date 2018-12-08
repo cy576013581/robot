@@ -1,5 +1,6 @@
 # robot
-this is robot
+
+![](./pic)
 
 #### 开发日志
 
