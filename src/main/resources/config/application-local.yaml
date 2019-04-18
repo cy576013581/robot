@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json
+    min-response-size: 1024
+
+logging:
+  file: logs/robot.log
+  file.max-size: 100MB
+  file.max-history: 10
+  level:
+    root: info
+    com.cy.robot: debug
+
+spring:
+  application:
+    name: robot
+  resources:
+    add-mappings: true
+    static-locations: classpath:/static/,classpath:/public/
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    url: jdbc:mysql://39.108.143.76/example
+#    password: 123456
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root
