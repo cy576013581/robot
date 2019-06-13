@@ -33,7 +33,7 @@
         <java.version>10</java.version>
         <commons-cli.version>1.4</commons-cli.version>
         <jaxb-impl.version>2.3.0</jaxb-impl.version>
-        <hanlp.version>1.6.8</hanlp.version>
+        <hanlp.version>1.7.2</hanlp.version>
         <druid.version>1.0.11</druid.version>
         <mysql-connector-java.version>5.1.22</mysql-connector-java.version>
         <httpclient.version>4.5.6</httpclient.version>
