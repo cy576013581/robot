@@ -1,6 +1,5 @@
 package com.cy.robot.controller;
 
-import com.cy.robot.carrier.Code;
 import com.cy.robot.carrier.Answer;
 import com.cy.robot.carrier.Question;
 import com.cy.robot.carrier.Result;
@@ -30,7 +29,7 @@ public class KernelController {
     public Result<String> reply(@RequestBody Question question){
         log.debug("question :{}",question.getText());
         Answer answer = kernelService.reply(question);
-        return new Result(answer.getCode(),answer.getText());
+        return new Result<>(answer.getCode(),answer.getText());
     }
 
 }

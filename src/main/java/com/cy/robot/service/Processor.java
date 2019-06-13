@@ -4,7 +4,6 @@ import com.cy.robot.config.ApplicationProperties;
 import com.cy.robot.util.NormalizeUtil;
 import com.hankcs.hanlp.HanLP;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -17,29 +16,32 @@ import org.springframework.util.StringUtils;
 @Component
 public class Processor {
 
-    @Autowired
-    private ApplicationProperties properties;
+    private final ApplicationProperties props;
+
+    public Processor(ApplicationProperties props) {
+        this.props = props;
+    }
 
     /**
      * 输入处理
      */
     public String normalize(String text) {
 
-        if (properties.getProcessor().isTransfoHalfWidth()) {
+        if (props.getProcessor().isTransfoHalfWidth()) {
             text = NormalizeUtil.toHalfWidth(text);
         }else{
             text = NormalizeUtil.punctuatioToFullWidth(text);
         }
 
-        if (properties.getProcessor().isIgnoreCase()) {
+        if (props.getProcessor().isIgnoreCase()) {
             text = text.toLowerCase();
         }
 
-        if (properties.getProcessor().isTrimWhitespace()) {
+        if (props.getProcessor().isTrimWhitespace()) {
             text = StringUtils.trimAllWhitespace(text);
         }
 
-        if (properties.getProcessor().isTransfoSimplified()) {
+        if (props.getProcessor().isTransfoSimplified()) {
             text = HanLP.convertToSimplifiedChinese(text);
 
         }

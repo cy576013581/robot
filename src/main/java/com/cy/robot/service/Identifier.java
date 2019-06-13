@@ -7,7 +7,6 @@ import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.hankcs.hanlp.mining.word2vec.WordVectorModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -28,11 +27,9 @@ import java.util.Map;
 @Service
 public class Identifier {
 
-    @Autowired
-    private ApplicationProperties props;
+    private final ApplicationProperties props;
 
-    @Autowired
-    private Processor processor;
+    private final Processor processor;
 
     private WordVectorModel wordVectorModel;
 
@@ -48,8 +45,13 @@ public class Identifier {
 
     private List<String> questions = new ArrayList<>();
 
-    @Autowired
-    private List<Execute> executes;
+    private final List<Execute> executes;
+
+    public Identifier(ApplicationProperties props, Processor processor, List<Execute> executes) {
+        this.props = props;
+        this.processor = processor;
+        this.executes = executes;
+    }
 
     /**
      * 初始化。

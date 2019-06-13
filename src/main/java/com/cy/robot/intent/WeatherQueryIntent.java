@@ -6,13 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 public class WeatherQueryIntent extends Intent {
 
-    String city;
+    private String city = "北京";
 
-    String date;
+    private String date = LocalDate.now().toString();
 }

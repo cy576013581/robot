@@ -15,10 +15,14 @@ import java.util.List;
 public class Weather implements Serializable {
 
     private String city;
-    private Yesterday yesterday;
-    private String aqi;
-    private String ganmao;
-    private String wendu;
-    private List<Forecast> forecast;
 
+    private Yesterday yesterday;
+
+    private String aqi;
+
+    private String ganmao;
+
+    private String wendu;
+    
+    private List<Forecast> forecast;
 }

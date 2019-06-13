@@ -4,19 +4,20 @@ import com.cy.robot.config.ApplicationProperties;
 import com.cy.robot.time.nlp.TimeNormalizer;
 import com.cy.robot.time.nlp.TimeUnit;
 import com.cy.robot.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
 
 @Service
 public class DateService {
 
-    @Autowired
-    private ApplicationProperties props;
+    private final ApplicationProperties props;
 
     private TimeNormalizer normalizer;
+
+    public DateService(ApplicationProperties props) {
+        this.props = props;
+    }
 
     @PostConstruct
     public void init() {

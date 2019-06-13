@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public abstract class Intent {
 
@@ -31,10 +32,6 @@ public abstract class Intent {
      */
     @JsonIgnore
     protected Answer answer;
-
-    public Intent(){
-
-    }
 
     public Intent(String intent){
         this.intent = intent;

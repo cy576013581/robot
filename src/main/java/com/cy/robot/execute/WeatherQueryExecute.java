@@ -12,10 +12,8 @@ import com.cy.robot.carrier.Word;
 import com.cy.robot.domain.Weather;
 import com.cy.robot.intent.WeatherQueryIntent;
 import com.cy.robot.time.DateService;
-import com.cy.robot.time.nlp.TimeUnit;
 import com.cy.robot.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -30,24 +28,23 @@ import java.util.Optional;
 @Component
 public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
 
-    private static final String domain = "WEATHER";
+    private static final String DOMAIN = "WEATHER";
 
-    private static final String intent = "WEATHER_QUERY";
+    private static final String INTENT = "WEATHER_QUERY";
 
-    public WeatherQueryExecute() {
-        super(domain, intent);
+    private final WeatherDataService weatherDataService;
+
+    private final DateService dateService;
+
+    public WeatherQueryExecute(WeatherDataService weatherDataService, DateService dateService) {
+        super(DOMAIN, INTENT);
+        this.weatherDataService = weatherDataService;
+        this.dateService = dateService;
     }
-
-    @Autowired
-    private WeatherDataService weatherDataService;
-
-    @Autowired
-    private DateService dateService;
 
     @Override
     public Optional<WeatherQueryIntent> start(String text, List<Word> words) {
         WeatherQueryIntent intent = new WeatherQueryIntent();
-        intent.setCity("北京");
         for(Word w : words){
             if("t".equals(w.getNature())){
                 String date = dateService.parse(w.getWord());// 抽取时间
@@ -57,9 +54,6 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
             }else if("ns".equals(w.getNature())){
                 intent.setCity(w.getWord());
             }
-        }
-        if(null == intent.getDate() || "".equals(intent.getDate())){
-            intent.setDate(LocalDate.now().toString());
         }
         return Optional.of(intent);
     }

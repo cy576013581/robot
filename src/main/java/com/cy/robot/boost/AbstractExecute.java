@@ -7,22 +7,21 @@ import org.springframework.core.annotation.Order;
 @Order(10000)
 public abstract class AbstractExecute<T extends Intent> implements Execute<T> {
 
-    protected String intent;
+    protected String INTENT;
 
-    protected String domain;
+    protected String DOMAIN;
 
     @Autowired
     protected ApplicationProperties props;
 
-    public AbstractExecute(String domain,String intent){
-        this.domain = domain;
-        this.intent = intent;
-        this.props = props;
+    public AbstractExecute(String DOMAIN,String INTENT){
+        this.DOMAIN = DOMAIN;
+        this.INTENT = INTENT;
     }
 
     @Override
     public String getIntent() {
-        return intent;
+        return INTENT;
     }
 
 }
