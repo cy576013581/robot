@@ -33,6 +33,7 @@
         <java.version>10</java.version>
         <commons-cli.version>1.4</commons-cli.version>
         <jaxb-impl.version>2.3.0</jaxb-impl.version>
+        <guava.version>25.1-jre</guava.version>
         <hanlp.version>1.7.2</hanlp.version>
         <druid.version>1.0.11</druid.version>
         <mysql-connector-java.version>5.1.22</mysql-connector-java.version>
@@ -103,6 +104,12 @@
             <artifactId>commons-cli</artifactId>
             <version>${commons-cli.version}</version>
             <optional>true</optional>
+        </dependency>
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
         <!--mysql-->

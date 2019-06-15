@@ -29,6 +29,7 @@ public class KernelController {
     public Result<String> reply(@RequestBody Question question){
         log.debug("question :{}",question.getText());
         Answer answer = kernelService.reply(question);
+        log.info("{}",answer);
         return new Result<>(answer.getCode(),answer.getText());
     }
 

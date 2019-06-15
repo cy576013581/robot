@@ -15,6 +15,11 @@ public interface Execute<T extends Intent> {
     String getIntent();
 
     /**
+     * 对应的实体
+     */
+    String getDomain();
+
+    /**
      * 根据问题开始话题。
      *
      * @param text 输入的语句

@@ -10,10 +10,20 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class Answer {
 
-    //    操作代码
-    @NonNull
-    Code code;
+    private Code code;
 
-    @NonNull
-    String text;
+    /**
+     * 实体
+     */
+    private String domain;
+
+    /**
+     * 意图
+     */
+    private String intent;
+
+    /**
+     * 答案文本
+     */
+    private String text;
 }

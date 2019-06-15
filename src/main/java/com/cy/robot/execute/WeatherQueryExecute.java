@@ -1,24 +1,26 @@
 package com.cy.robot.execute;
 
 import com.cy.robot.boost.AbstractExecute;
-import com.cy.robot.business.entity.Forecast;
 import com.cy.robot.business.entity.WeatherResponse;
-import com.cy.robot.business.entity.Yesterday;
 import com.cy.robot.business.service.WeatherDataService;
 import com.cy.robot.carrier.Answer;
 import com.cy.robot.carrier.Code;
 import com.cy.robot.carrier.Judge;
 import com.cy.robot.carrier.Word;
+import com.cy.robot.config.ApplicationProperties;
 import com.cy.robot.domain.Weather;
 import com.cy.robot.intent.WeatherQueryIntent;
 import com.cy.robot.time.DateService;
 import com.cy.robot.util.DateUtil;
+import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /*
@@ -28,23 +30,26 @@ import java.util.Optional;
 @Component
 public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
 
-    private static final String DOMAIN = "WEATHER";
+    public static final String DOMAIN = "WEATHER";
 
-    private static final String INTENT = "WEATHER_QUERY";
+    public static final String INTENT = "WEATHER_QUERY";
 
     private final WeatherDataService weatherDataService;
 
     private final DateService dateService;
 
-    public WeatherQueryExecute(WeatherDataService weatherDataService, DateService dateService) {
-        super(DOMAIN, INTENT);
+    public WeatherQueryExecute(WeatherDataService weatherDataService,
+                               DateService dateService,
+                               SpringTemplateEngine templateEngine,
+                               ApplicationProperties props) {
+        super(DOMAIN, INTENT,templateEngine,props);
         this.weatherDataService = weatherDataService;
         this.dateService = dateService;
     }
 
     @Override
     public Optional<WeatherQueryIntent> start(String text, List<Word> words) {
-        WeatherQueryIntent intent = new WeatherQueryIntent();
+        WeatherQueryIntent intent = new WeatherQueryIntent("杭州",LocalDate.now().toString());
         for(Word w : words){
             if("t".equals(w.getNature())){
                 String date = dateService.parse(w.getWord());// 抽取时间
@@ -74,34 +79,11 @@ public class WeatherQueryExecute extends AbstractExecute<WeatherQueryIntent> {
 
         WeatherResponse response = weatherDataService.getDataByCityName(intent.getCity());
         Weather weather = response.getData();
+
         int diff = DateUtil.getDiff(DateUtil.parseDate(DateUtil.formatDate(new Date()))
                 ,DateUtil.parseDate(intent.getDate()));
-        StringBuilder sb = new StringBuilder();
-        if(diff == -1){
-            Yesterday yesterday = weather.getYesterday();
-            sb.append(yesterday.getDate())
-                    .append(weather.getCity())
-                    .append("的天气：").append(yesterday.getType())
-                    .append("，").append(yesterday.getHigh())
-                    .append("，").append(yesterday.getLow())
-
-                    .append("，").append(weather.getGanmao())
-                    .append(props.getName()).append("祝您生活愉快！");
-        }else{
-            Forecast forecast = weather.getForecast().get(diff);
-            sb.append(forecast.getDate())
-                    .append(weather.getCity())
-                    .append("的天气：").append(forecast.getType())
-                    .append("，").append(forecast.getHigh())
-                    .append("，").append(forecast.getLow())
-
-                    .append("，").append(weather.getGanmao())
-                    .append(props.getName()).append("祝您生活愉快！");
-        }
-
-        Answer answer = new Answer();
-        answer.setText(sb.toString());
-        answer.setCode(Code.SUCCESS);
-        return answer;
+        weather.setDiff(diff);
+        Map<String, Object> params = ImmutableMap.of("data",weather);
+        return new Answer(Code.SUCCESS,DOMAIN,INTENT, applyTemplate(params));
     }
 }

@@ -1,0 +1,19 @@
+[# th:if="${data.diff == -1}"]
+    [(${data.yesterday.date})][(${data.city})]的天气：
+    [(${data.yesterday.type})]，
+    [(${data.yesterday.low})]，
+    [(${data.ganmao})]
+[/]
+[# th:if="${data.diff >= 5}"]
+    抱歉，现在只支持预测5天内的天气预报哦。
+[/]
+[# th:if="${data.diff >= 0 && data.diff < 5}"]
+    [# th:each="d,it : ${data.forecast}"]
+        [# th:if="${it.index == data.diff}"]
+           [(${d.date})][(${data.city})]的天气：
+           [(${d.type})]，
+           [(${d.low})]，
+           [(${data.ganmao})]
+        [/]
+    [/]
+[/]

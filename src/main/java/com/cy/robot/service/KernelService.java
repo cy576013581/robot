@@ -74,13 +74,13 @@ public class KernelService {
                         if (judge.isFlag()) {
                             return execute.apply(optionalIntent.get());
                         } else {
-                            return new Answer(Code.UNFULL, judge.getText());
+                            return new Answer(Code.UNFULL,domain,intent, judge.getText());
                         }
                     }
                 }
             }
         }
-        return new Answer(Code.UNABLE, "暂时无法回答您的问题！");
+        return new Answer(Code.UNABLE,"NULL","NULL", "暂时无法回答您的问题！");
     }
 
 }
